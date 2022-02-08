@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chat-Bot</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawsome.com/a076d05399.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <img src="chatbot.png" align="left" height="50%">
+    <style>
+        body {
+          background-image: url("snowy-mountain.png");
+        }
+      </style>
+    <div class="wrapper">
+        <div class="title">
+            Online Chat-Bot
+        </div>
+        <div class="form">
+            <div class="bot-inbox inbox">
+                <div class="icon"><i class="fas fa-user"></i>
+                </div>
+                <div class="msg-header">
+                    <p>Hello There, How Can I Help You?</p>
+                </div>
+            </div>
+        </div>
+        <div class="typing-field">
+            <div class="input-data">
+                <input id="data" type="text" placeholder="Type something here..." required>
+                <button id="send-btn">Send</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $("#send-btn").on("click", function(){
+                $value = $("#data").val();
+                $msg  = '<div class="user-inbox inbox"><div class="msg-header"><p>'+$value+'</p></div></div>';
+                $(".form").append($msg);
+                $("#data").val('');
+
+                //start ajax code
+                $.ajax({
+                    url: 'message.php',
+                    type: 'POST',
+                    data: 'text ='+$value,
+                    success: function(result){
+                        
+                    }
+                })
+            })
+        });
+    </script>
+</body>
+</html>
